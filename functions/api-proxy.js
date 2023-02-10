@@ -1,10 +1,18 @@
-const axios = require("axios");
+const https = require("https");
 
-exports.handler = async (event, context) => {
+exports.handler = (event, context, callback) => {
   const url = event.queryStringParameters.url;
-  const response = await axios.get(url);
-  return {
-    statusCode: 200,
-    body: JSON.stringify(response.data)
-  };
+
+  https.get(url, (response) => {
+    let data = "";
+    response.on("data", (chunk) => {
+      data += chunk;
+    });
+    response.on("end", () => {
+      callback(null, {
+        statusCode: 200,
+        body: data,
+      });
+    });
+  });
 };
