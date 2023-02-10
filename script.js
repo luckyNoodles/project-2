@@ -3,12 +3,13 @@ fifaMatch.randomizeApiKey = (array) => {
     return array[Math.floor(Math.random()*array.length)]
 }
 // https://proxy-ugwolsldnq-uc.a.run.app/
+// https://worldcup-app.netlify.app/.netlify/functions/api-proxy?url=https://api.football-data.org/v4/competitions/WC/matches
 
 fifaMatch.getData = () => {
     const urls = [
-        'https://api.football-data.org/v4/competitions/WC/matches',
-        'https://api.football-data.org/v4/competitions/WC/teams',
-        'https://api.football-data.org/v4/competitions/WC/scorers'
+        'https://worldcup-app.netlify.app/.netlify/functions/api-proxy?url=https://api.football-data.org/v4/competitions/WC/matches',
+        'https://worldcup-app.netlify.app/.netlify/functions/api-proxy?url=https://api.football-data.org/v4/competitions/WC/teams',
+        'https://worldcup-app.netlify.app/.netlify/functions/api-proxy?url=https://api.football-data.org/v4/competitions/WC/scorers'
     ];
     //header params
     urls.search = new URLSearchParams({

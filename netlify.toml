@@ -1,4 +1,0 @@
-[[redirects]]
-  from = "/v4/*"
-  to = "https://api.football-data.org/v4/:splat"
-  status = 200
