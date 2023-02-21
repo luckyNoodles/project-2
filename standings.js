@@ -10,7 +10,7 @@ footballStats.randomizeApiKey = (array) => {
 footballStats.getStageMatches = async (stage) => {
     footballStats.apikey = footballStats.randomizeApiKey(footballStats.apikeys)
     try{
-        const resObj = await fetch(`https://proxy-ugwolsldnq-uc.a.run.app/https://api.football-data.org/v4/competitions/WC/matches?stage=${stage}`, { method:'GET',
+        const resObj = await fetch(`https://proxy.junocollege.com/https://api.football-data.org/v4/competitions/WC/matches?stage=${stage}`, { method:'GET',
          headers: {
              'X-Auth-Token':footballStats.apikey
             }

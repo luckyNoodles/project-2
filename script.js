@@ -7,9 +7,9 @@ fifaMatch.randomizeApiKey = (array) => {
 
 fifaMatch.getData = () => {
     const urls = [
-        'https://worldcup-app.netlify.app/.netlify/functions/api-proxy?url=https://api.football-data.org/v4/competitions/WC/matches',
-        'https://worldcup-app.netlify.app/.netlify/functions/api-proxy?url=https://api.football-data.org/v4/competitions/WC/teams',
-        'https://worldcup-app.netlify.app/.netlify/functions/api-proxy?url=https://api.football-data.org/v4/competitions/WC/scorers'
+        'https://proxy.junocollege.com/https://api.football-data.org/v4/competitions/WC/matches',
+        'https://proxy.junocollege.com/https://api.football-data.org/v4/competitions/WC/teams',
+        'https://proxy.junocollege.com/https://api.football-data.org/v4/competitions/WC/scorers'
     ];
     //header params
     urls.search = new URLSearchParams({
@@ -29,6 +29,7 @@ fifaMatch.getData = () => {
                 return res.json();
             })
             .then((resData) => {
+                console.log(resData)
                 document.querySelector('.load-wrapp').classList.add('hide')
                 return resData;
             })
