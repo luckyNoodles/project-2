@@ -42,6 +42,7 @@ fifaMatch.getData = () => {
               fifaMatch.displayTeams(teamData);
               fifaMatch.getAllPlayers(teamData);
               fifaMatch.displayTopScorers(teamData);
+              console.log(teamData);
             }
             ))
 }
@@ -61,22 +62,22 @@ fifaMatch.getAllPlayers = function(teamData) {
 
 fifaMatch.searchPlayers = (mergedList) => {
     const theList = mergedList;
-    console.log(theList);
+    // console.log(theList);
 
     const textToSearch = document.querySelector('form');
-    console.log(textToSearch);
+    // console.log(textToSearch);
     textToSearch.addEventListener('submit', (event) => {
         event.preventDefault();
         const input = document.querySelector('input');
         const value = input.value;
-        console.log(value);
+        // console.log(value);
         const responseList = [];
 
         for(let i = 0; i < theList.length; i++) {
             const player = theList[i].name.toLowerCase();
 
             if(player.includes(value)) {
-                console.log(player);
+                // console.log(player);
                 responseList.push(theList[i]);
             } 
             
@@ -116,6 +117,7 @@ fifaMatch.searchDisplay = (responseList) => {
 }
 
 fifaMatch.displayTeams = function(teamData) {
+    // console.log(teamData);
     const squadData = teamData[1];
     const teamObject = teamData[1].teams;
     
@@ -147,7 +149,7 @@ fifaMatch.displayTeams = function(teamData) {
         countryName.innerText = 
             `${teamObject[i].name}
             Team Founded : ${teamObject[i].founded}
-            Coach : ${teamObject[i].coach.name}`;
+            Website : ${teamObject[i].website}`;
         teamInfoBox.appendChild(countryName);
         
         document.querySelector('.main-container').appendChild(teamContainer); //Appends the team container to the page
@@ -156,6 +158,7 @@ fifaMatch.displayTeams = function(teamData) {
 }
 
 fifaMatch.getSquad = (arrayIndex, squadData) => {
+    console.log(squadData);
     const container = document.querySelector('.main-container');
     container.innerHTML = "";
 
@@ -173,6 +176,7 @@ fifaMatch.getSquad = (arrayIndex, squadData) => {
     const squadIndex = arrayIndex;
     const squadObject = squadData;
     const squadList = squadObject.teams[squadIndex].squad;
+    // console.log(squadList);
 
     for (let i = 0; i < squadList.length; i++) {
         
@@ -263,10 +267,13 @@ fifaMatch.displayAllPlayers = (teamArray) => {
 }
 
 fifaMatch.displayTopScorers = (teamData) => {
+    console.log("This is teamData function");
+
     const container = document.querySelector('.scorer-container');
     container.innerHTML = "";
 
     const topArray = teamData[2];
+    console.log(topArray);
     const scoreArray = topArray.scorers;
     const topTab = document.getElementById('top-scorers');
     const topContainer = document.createElement('div');
