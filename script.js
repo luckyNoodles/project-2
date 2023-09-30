@@ -366,7 +366,9 @@ tabs.forEach(tab => {
 })
 
 fifaMatch.init = () => {
-    fifaMatch.apikeys = ['ce76110580a24979bfb7ae9dabb81570','70a843e5cf86426b9a1a9528ec8a7da7', '216fc317fce14a3e92c6759cc84f2ceb', '6a015959a852460a971b3fe44d9ddd99', '6db1d2cbe8a747be8e975a3e6dd86a4f']
+    fifaMatch.apikeys = [
+        'ce76110580a24979bfb7ae9dabb81570','70a843e5cf86426b9a1a9528ec8a7da7', '216fc317fce14a3e92c6759cc84f2ceb', '6a015959a852460a971b3fe44d9ddd99', '6db1d2cbe8a747be8e975a3e6dd86a4f'
+    ]
     fifaMatch.getData();
    
 }; //end of init function
