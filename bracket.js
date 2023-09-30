@@ -2,7 +2,6 @@
 const footballStats = {};
 // initialize apikey
 
-// footballStats.apikey = '70a843e5cf86426b9a1a9528ec8a7da7';
 footballStats.randomizeApiKey = (array) => {
     return array[Math.floor(Math.random()*array.length)]
 }
@@ -41,23 +40,6 @@ footballStats.display = (dates, sortedMatches, stage) => {
                matchTeam2FlagImg.src = match.team2.flag
                const matchTeam2Info = matchDiv.querySelector('[data-team2-info]')
                matchTeam2Info.textContent = `${match.team2.name} ${match.team2.score.fullTime}`
-   
-               // <<<<<< Winner >>>>>>>>>>>>>>>
-            //    const winnerDiv = matchDiv.querySelector('[data-winner]')
-            //    winnerDiv.textContent = `Winner : ${match.winner}`
-               // <<<<<<<<<<< More Info addition >>>>>>>>
-            //    matchDiv.querySelector('[data-competition-name]').textContent = `${match.competition.name}`
-            //    matchDiv.querySelector('[data-competition-emblem]').src = `${match.competition.emblem}`
-            //    matchDiv.querySelector('[data-match-date]').textContent = `Date: ${match.date}`
-            //    matchDiv.querySelector('[data-group]').textContent = `Group: ${match.group}`
-            //    matchDiv.querySelector('[data-stage]').textContent = `Stage: ${match.stage}`
-            //    matchDiv.querySelector('[data-match-day]').textContent = `Match day:${match.matchDay}`
-            //    matchDiv.querySelector('[data-status]').textContent = `Status: ${match.status}`
-            //    matchDiv.querySelector('[data-winner]').textContent = `Winner: ${match.winner}`
-               
-
-
-
         
                // <<<<<<<< append >>>>>>>>>>>>>>
                matchTable.append(matchDiv)
@@ -88,7 +70,7 @@ footballStats.getDates = (matches) => {
     matches.forEach(match => {
         date = new Date(match.utcDate)
         dates.push(date.toDateString())
-        // footballStats.sortedByDateMatches.date = {team1:match.awayTeam.name, team2:match.homeTeam.name, date:date.toDateString()};
+      
     })
     const uniqueDates = [...new Set(dates)]
     footballStats.uniqueDates = uniqueDates
@@ -235,7 +217,9 @@ footballStats.eventListeners = () => {
 
 footballStats.init = () =>{
     stages = ['GROUP_STAGE', 'LAST_16','QUARTER_FINALS', 'SEMI_FINALS','THIRD_PLACE', 'FINAL']
-    footballStats.apikeys = ['ce76110580a24979bfb7ae9dabb81570','70a843e5cf86426b9a1a9528ec8a7da7', '216fc317fce14a3e92c6759cc84f2ceb', '6a015959a852460a971b3fe44d9ddd99', '6db1d2cbe8a747be8e975a3e6dd86a4f']
+    footballStats.apikeys = [
+        'ce76110580a24979bfb7ae9dabb81570','70a843e5cf86426b9a1a9528ec8a7da7', '216fc317fce14a3e92c6759cc84f2ceb', '6a015959a852460a971b3fe44d9ddd99', '6db1d2cbe8a747be8e975a3e6dd86a4f'
+    ]
     asyncNextStep = async () => {
         stagesMatches = []
         for (i=0;i<stages.length;i++){
