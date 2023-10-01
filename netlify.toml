@@ -1,5 +1,5 @@
 [[redirects]]
   from = "https://api.football-data.org/v4/competitions/WC/matches?stage=${stage}"
-  to = "https://fifa-api.netlify.app/.netlify/functions/knockouts/:splat"
+  to = "https://fifa-api.netlify.app/.netlify/functions/knockouts"
   status = 200
   force = true
