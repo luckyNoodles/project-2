@@ -10,21 +10,18 @@ footballStats.convertDate = (utcDate) => {
     return date.toDateString()
 }
 
+
 footballStats.getStageMatches = async (stage) => {
-
-    // footballStats.apikey = footballStats.randomizeApiKey(footballStats.apikeys)
+    footballStats.apikey = footballStats.randomizeApiKey(footballStats.apikeys)
     try{
-        // console.log(stage)
-        const resObj = await fetch(`/pages/knockouts/?stage=${stage}`)
-       
-        if (!resObj.ok) {
-            throw new Error(`HTTP error! Status: ${resObj.status}`);
-        }
-
+        const resObj = await fetch(`https://proxy.junocollege.com/https://api.football-data.org/v4/competitions/WC/matches?stage=${stage}`, { method:'GET',
+         headers: {
+             'X-Auth-Token':footballStats.apikey
+            }
+        })
+    
         const jsonData = await resObj.json()
-        console.log(jsonData)
-
-        // return jsonData
+        return jsonData
         
     }
     catch (error){
@@ -32,11 +29,15 @@ footballStats.getStageMatches = async (stage) => {
        errorElement.textContent = `${error.message}. 60s before API is pinged again`
         document.querySelector('.load-wrapp').classList.add('hide')
         document.querySelector('.standings').append(errorElement)
-        // setTimeout(footballStats.init, 60000)
+        setTimeout(footballStats.init, 60000)
 
     }
     
+    
 }
+
+  
+     
 
 footballStats.getMatches = (matches) => {
     const resultsArray = []
