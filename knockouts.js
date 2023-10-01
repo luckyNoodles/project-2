@@ -29,7 +29,7 @@ footballStats.getStageMatches = async (stage) => {
        errorElement.textContent = `${error.message}. 60s before API is pinged again`
         document.querySelector('.load-wrapp').classList.add('hide')
         document.querySelector('.standings').append(errorElement)
-        setTimeout(footballStats.init, 60000)
+        // setTimeout(footballStats.init, 60000)
 
     }
     
