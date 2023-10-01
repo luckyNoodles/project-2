@@ -12,19 +12,19 @@ footballStats.convertDate = (utcDate) => {
 
 footballStats.getStageMatches = async (stage) => {
 
-    footballStats.apikey = footballStats.randomizeApiKey(footballStats.apikeys)
+    // footballStats.apikey = footballStats.randomizeApiKey(footballStats.apikeys)
     try{
         // console.log(stage)
         const resObj = await fetch(`/pages/knockouts/?stage=${stage}`)
-        //  console.log(resObj)
-        // if (!resObj.ok) {
-        //     throw new Error(`HTTP error! Status: ${resObj.status}`);
-        // }
+       
+        if (!resObj.ok) {
+            throw new Error(`HTTP error! Status: ${resObj.status}`);
+        }
 
         const jsonData = await resObj.json()
         console.log(jsonData)
 
-        return jsonData
+        // return jsonData
         
     }
     catch (error){
