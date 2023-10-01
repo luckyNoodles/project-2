@@ -2,5 +2,5 @@
   from = "/pages/knockouts"
   to = "https://fifa-api.netlify.app/.netlify/functions/knockouts"
   status = 200
-  force = true
+ 
 

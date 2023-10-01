@@ -11,8 +11,10 @@ footballStats.convertDate = (utcDate) => {
 }
 
 footballStats.getStageMatches = async (stage) => {
+
     footballStats.apikey = footballStats.randomizeApiKey(footballStats.apikeys)
     try{
+        console.log(stage)
         const resObj = await fetch(`/pages/knockouts/?stage=${stage}`)
 
         if (!resObj.ok) {
