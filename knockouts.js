@@ -16,13 +16,14 @@ footballStats.getStageMatches = async (stage) => {
     try{
         // console.log(stage)
         const resObj = await fetch(`/pages/knockouts/?stage=${stage}`)
-         console.log(resObj)
-        if (!resObj.ok) {
-            throw new Error(`HTTP error! Status: ${resObj.status}`);
-        }
+        //  console.log(resObj)
+        // if (!resObj.ok) {
+        //     throw new Error(`HTTP error! Status: ${resObj.status}`);
+        // }
 
         const jsonData = await resObj.json()
         console.log(jsonData)
+
         return jsonData
         
     }
