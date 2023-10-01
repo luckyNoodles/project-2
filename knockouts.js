@@ -14,9 +14,9 @@ footballStats.getStageMatches = async (stage) => {
 
     footballStats.apikey = footballStats.randomizeApiKey(footballStats.apikeys)
     try{
-        console.log(stage)
+        // console.log(stage)
         const resObj = await fetch(`/pages/knockouts/?stage=${stage}`)
-
+         console.log(resObj)
         if (!resObj.ok) {
             throw new Error(`HTTP error! Status: ${resObj.status}`);
         }
