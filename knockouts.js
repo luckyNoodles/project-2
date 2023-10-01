@@ -13,7 +13,7 @@ footballStats.convertDate = (utcDate) => {
 footballStats.getStageMatches = async (stage) => {
     footballStats.apikey = footballStats.randomizeApiKey(footballStats.apikeys)
     try{
-        const resObj = await fetch(`https://fifa-api.netlify.app/.netlify/functions/knockouts/?stage=${stage}`)
+        const resObj = await fetch(`/pages/knockouts/?stage=${stage}`)
 
         if (!resObj.ok) {
             throw new Error(`HTTP error! Status: ${resObj.status}`);
