@@ -6,7 +6,7 @@ footballStats.randomizeApiKey = (array) => {
 
 
 footballStats.getStageMatches = async (stage) => {
-    footballStats.apikey = footballStats.randomizeApiKey(footballStats.apikeys)
+    footballStats.apikey = footballStats.apikeys
     try{
         const resObj = await fetch(`https://proxy.junocollege.com/https://api.football-data.org/v4/competitions/WC/matches?stage=${stage}`, { method:'GET',
          headers: {
@@ -167,15 +167,29 @@ footballStats.eventListeners = (groups) => {
 
 }
 
-
-
-
-footballStats.init = () =>{
+footballStats.init = async () =>{
     stages = ['GROUP_STAGE']
     // , 'LAST_16','QUARTER_FINALS', 'SEMI_FINALS','THIRD_PLACE', 'FINAL']
-    footballStats.apikeys = [
-        'ce76110580a24979bfb7ae9dabb81570','70a843e5cf86426b9a1a9528ec8a7da7', '216fc317fce14a3e92c6759cc84f2ceb', '6a015959a852460a971b3fe44d9ddd99', '6db1d2cbe8a747be8e975a3e6dd86a4f'
-    ]
+    
+     try {
+      const apiKeyName = "apiKey3";
+      const response = await fetch(
+        `http://localhost:8888/.netlify/functions/getApiKey?key=${apiKeyName}`
+      );
+      if (!response.ok) {
+        throw new Error("Failed to fetch API key");
+      }
+
+      const data = await response.json();
+      const apiKey = data.apiKey;
+      console.log(`API Key: ${apiKey}`);
+      // You can return apiKey here if needed
+
+      footballStats.apikeys = apiKey; // Assign apiKey to footballStats.apikeys
+    } catch (error) {
+      console.error(error);
+    }
+    
     asyncNextStep = async () => {
         stagesMatches = []
         for (i=0;i<stages.length;i++){
