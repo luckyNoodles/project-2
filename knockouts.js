@@ -190,14 +190,16 @@ footballStats.init = async () =>{
     // 'THIRD_PLACE'
 
     try {
+      const apiKeyName = "apiKey4";
       const response = await fetch(
-        "http://localhost:8888/.netlify/functions/getApiKey"
+        `http://localhost:8888/.netlify/functions/getApiKey?key=${apiKeyName}`
       );
       if (!response.ok) {
         throw new Error("Failed to fetch API key");
       }
 
       const data = await response.json();
+      console.log(data);
       const apiKey = data.apiKey;
       console.log(`API Key: ${apiKey}`);
       // You can return apiKey here if needed
@@ -206,31 +208,6 @@ footballStats.init = async () =>{
     } catch (error) {
       console.error(error);
     }
-
-
-// footballStats.apikeys = await fetch('http://localhost:8888/.netlify/functions/getApiKey')
-//         .then((response) => response.json())
-//         .then((data) => {
-//             const apiKey = data.apiKey;
-//                 console.log(`API Key: ${apiKey}`);
-//                 // return apiKey;
-//         })
-//         .catch((error) => {
-//             console.error(error);
-//     });
-
-    // footballStats.apikeys = fetch('https://worldcup-app.netlify.app/.netlify/functions/getApiKey')
-    //     .then((response) => response.json())
-    //     .then((data) => {
-    //         const apiKey = data.API_SECRET;
-    //             // Use the apiKey to make API requests
-    //             console.log(`API Key: ${apiKey}`);
-    //     })
-    //     .catch((error) => {
-    //         console.error('Error fetching API key:', error);
-    // });
-
-    // console.log(footballStats.apikeys)
 
     asyncNextStep = async () => {
         stagesMatches = []

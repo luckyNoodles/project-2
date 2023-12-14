@@ -16,7 +16,7 @@ fifaMatch.getData = () => {
         season: '2022',
         cache: 'default'
     })
-    fifaMatch.apikey = fifaMatch.randomizeApiKey(fifaMatch.apikeys)
+    fifaMatch.apikey = fifaMatch.apikeys
     
     const teamsAndPlayers = urls.map(url => {
         return fetch(url, {
@@ -365,15 +365,27 @@ tabs.forEach(tab => {
     })
 })
 
-fifaMatch.init = () => {
-    fifaMatch.apikeys = [
-        process.env.REACT_APP_FOOTBALL1_API_KEY, 
-        process.env.REACT_APP_FOOTBALL2_API_KEY, 
-        process.env.REACT_APP_FOOTBALL3_API_KEY, 
-        process.env.REACT_APP_FOOTBALL4_API_KEY, 
-        process.env.REACT_APP_FOOTBALL5_API_KEY
-    ]
-    
+fifaMatch.init = async () => {
+   
+    try {
+      const apiKeyName = "apiKey1";
+      const response = await fetch(
+        `http://localhost:8888/.netlify/functions/getApiKey?key=${apiKeyName}`
+      );
+      if (!response.ok) {
+        throw new Error("Failed to fetch API key");
+      }
+
+      const data = await response.json();
+      const apiKey = data.apiKey;
+      console.log(`API Key: ${apiKey}`);
+      // You can return apiKey here if needed
+
+      footballStats.apikeys = apiKey; // Assign apiKey to footballStats.apikeys
+    } catch (error) {
+      console.error(error);
+    }
+
     fifaMatch.getData();
    
 }; //end of init function

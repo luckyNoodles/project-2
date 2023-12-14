@@ -161,7 +161,7 @@ footballStats.getData = (url) => {
         mode: 'cors',
         cache: 'default'
     })
-    footballStats.apikey = footballStats.randomizeApiKey(footballStats.apikeys)
+    footballStats.apikey = footballStats.apikeys
     // fetch, extract json, console log object 
     return new Promise((resolve, reject) => {
         fetch(url, {
@@ -274,10 +274,27 @@ footballStats.eventListeners = (matchesWithElements) =>{
     
 }
 
-footballStats.init = () => {
-    footballStats.apikeys = [
-        'ce76110580a24979bfb7ae9dabb81570','70a843e5cf86426b9a1a9528ec8a7da7', '216fc317fce14a3e92c6759cc84f2ceb', '6a015959a852460a971b3fe44d9ddd99', '6db1d2cbe8a747be8e975a3e6dd86a4f'
-    ]
+footballStats.init = async () => {
+    
+     try {
+      const apiKeyName = "apiKey2";
+      const response = await fetch(
+        `http://localhost:8888/.netlify/functions/getApiKey?key=${apiKeyName}`
+      );
+      if (!response.ok) {
+        throw new Error("Failed to fetch API key");
+      }
+
+      const data = await response.json();
+      const apiKey = data.apiKey;
+      console.log(`API Key: ${apiKey}`);
+      // You can return apiKey here if needed
+
+      footballStats.apikeys = apiKey; // Assign apiKey to footballStats.apikeys
+    } catch (error) {
+      console.error(error);
+    }
+
      footballStats.getData(`https://proxy.junocollege.com/https://api.football-data.org/v4/competitions/WC/matches`)
     .then((promisedData) =>{
         footballStats.matchResultsArray = footballStats.getMatches(promisedData.matches)
