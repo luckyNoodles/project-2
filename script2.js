@@ -277,8 +277,7 @@ footballStats.init = async () => {
 
     const data = await response.json();
     const apiKey = data.apiKey;
-    console.log(`API Key: ${apiKey}`);
-
+    
     footballStats.apikeys = apiKey;
   } catch (error) {
     console.error(error);

@@ -181,7 +181,7 @@ footballStats.eventListeners = (orderedMatchDivs) => {
 footballStats.init = async () =>{
     stages = ['LAST_16','QUARTER_FINALS', 'SEMI_FINALS', 'FINAL']
    
-    
+    try {
       const apiKeyName = "apiKey4";
       const response = await fetch(
         `https://worldcup-app.netlify.app/.netlify/functions/getApiKey?key=${apiKeyName}`
@@ -191,13 +191,12 @@ footballStats.init = async () =>{
       }
 
       const data = await response.json();
-      console.log(data);
       const apiKey = data.apiKey;
-      console.log(`API Key: ${apiKey}`);
       
-      footballStats.apikeys = apiKey; 
+      footballStats.apikeys = apiKey;
+    } catch (error) {
       console.error(error);
-    
+    }
 
     asyncNextStep = async () => {
         stagesMatches = []
