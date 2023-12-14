@@ -12,7 +12,8 @@ footballStats.convertDate = (utcDate) => {
 
 
 footballStats.getStageMatches = async (stage) => {
-    footballStats.apikey = footballStats.randomizeApiKey(footballStats.apikeys)
+    // footballStats.apikey = footballStats.randomizeApiKey(footballStats.apiKeys)
+    footballStats.apikey = footballStats.apikeys
     try{
         const resObj = await fetch(`https://proxy.junocollege.com/https://api.football-data.org/v4/competitions/WC/matches?stage=${stage}`, { method:'GET',
          headers: {
@@ -184,13 +185,53 @@ footballStats.eventListeners = (orderedMatchDivs) => {
     })
 }
 
-footballStats.init = () =>{
+footballStats.init = async () =>{
     stages = ['LAST_16','QUARTER_FINALS', 'SEMI_FINALS', 'FINAL']
     // 'THIRD_PLACE'
 
-    footballStats.apikeys = [
-        'ce76110580a24979bfb7ae9dabb81570','70a843e5cf86426b9a1a9528ec8a7da7', '216fc317fce14a3e92c6759cc84f2ceb', '6a015959a852460a971b3fe44d9ddd99', '6db1d2cbe8a747be8e975a3e6dd86a4f'
-    ]
+    try {
+      const response = await fetch(
+        "http://localhost:8888/.netlify/functions/getApiKey"
+      );
+      if (!response.ok) {
+        throw new Error("Failed to fetch API key");
+      }
+
+      const data = await response.json();
+      const apiKey = data.apiKey;
+      console.log(`API Key: ${apiKey}`);
+      // You can return apiKey here if needed
+
+      footballStats.apikeys = apiKey; // Assign apiKey to footballStats.apikeys
+    } catch (error) {
+      console.error(error);
+    }
+
+
+// footballStats.apikeys = await fetch('http://localhost:8888/.netlify/functions/getApiKey')
+//         .then((response) => response.json())
+//         .then((data) => {
+//             const apiKey = data.apiKey;
+//                 console.log(`API Key: ${apiKey}`);
+//                 // return apiKey;
+//         })
+//         .catch((error) => {
+//             console.error(error);
+//     });
+
+    // footballStats.apikeys = fetch('https://worldcup-app.netlify.app/.netlify/functions/getApiKey')
+    //     .then((response) => response.json())
+    //     .then((data) => {
+    //         const apiKey = data.API_SECRET;
+    //             // Use the apiKey to make API requests
+    //             console.log(`API Key: ${apiKey}`);
+    //     })
+    //     .catch((error) => {
+    //         console.error('Error fetching API key:', error);
+    // });
+
+    // console.log(footballStats.apikeys)
+
     asyncNextStep = async () => {
         stagesMatches = []
         for (i=0;i<stages.length;i++){
