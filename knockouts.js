@@ -1,9 +1,6 @@
 // initialize namespace
 const footballStats = {};
-// initialize apikey
-footballStats.randomizeApiKey = (array) => {
-    return array[Math.floor(Math.random()*array.length)]
-}
+
 
 footballStats.convertDate = (utcDate) => {
     date = new Date(utcDate)
@@ -12,8 +9,7 @@ footballStats.convertDate = (utcDate) => {
 
 
 footballStats.getStageMatches = async (stage) => {
-    // footballStats.apikey = footballStats.randomizeApiKey(footballStats.apiKeys)
-    footballStats.apikey = footballStats.apikeys
+      footballStats.apikey = footballStats.apikeys
     try{
         const resObj = await fetch(`https://proxy.junocollege.com/https://api.football-data.org/v4/competitions/WC/matches?stage=${stage}`, { method:'GET',
          headers: {
@@ -36,9 +32,6 @@ footballStats.getStageMatches = async (stage) => {
     
     
 }
-
-  
-     
 
 footballStats.getMatches = (matches) => {
     const resultsArray = []
@@ -187,8 +180,7 @@ footballStats.eventListeners = (orderedMatchDivs) => {
 
 footballStats.init = async () =>{
     stages = ['LAST_16','QUARTER_FINALS', 'SEMI_FINALS', 'FINAL']
-    // 'THIRD_PLACE'
-
+   
     try {
       const apiKeyName = "apiKey4";
       const response = await fetch(
@@ -202,10 +194,8 @@ footballStats.init = async () =>{
       console.log(data);
       const apiKey = data.apiKey;
       console.log(`API Key: ${apiKey}`);
-      // You can return apiKey here if needed
-
-      footballStats.apikeys = apiKey; // Assign apiKey to footballStats.apikeys
-    } catch (error) {
+      
+      footballStats.apikeys = apiKey; 
       console.error(error);
     }
 
@@ -216,11 +206,10 @@ footballStats.init = async () =>{
             stageMatches = {stage:stages[i], matches:matches}
             stagesMatches.push(stageMatches)
         }
-        // uniqueDatesOfStages = {}
+       
         matches = {}
         stagesMatches.forEach(stageMatches => {
-            // uniqueDatesOfStages[stageMatches.stage] = footballStats.getDates(stageMatches.matches.matches)
-            matches[stageMatches.stage] = footballStats.getMatches(stageMatches.matches.matches)
+                matches[stageMatches.stage] = footballStats.getMatches(stageMatches.matches.matches)
         })
         
         stagesWithDivs = footballStats.createStageDivs(stages)
@@ -248,10 +237,7 @@ footballStats.init = async () =>{
     }
 
     asyncNextStep(stages)
-        
-
 
 }
-    
     
 footballStats.init();
