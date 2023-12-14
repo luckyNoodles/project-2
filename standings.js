@@ -174,7 +174,7 @@ footballStats.init = async () =>{
      try {
       const apiKeyName = "apiKey3";
       const response = await fetch(
-        `http://localhost:8888/.netlify/functions/getApiKey?key=${apiKeyName}`
+        `https://worldcup-app.netlify.app/.netlify/functions/getApiKey?key=${apiKeyName}`
       );
       if (!response.ok) {
         throw new Error("Failed to fetch API key");
