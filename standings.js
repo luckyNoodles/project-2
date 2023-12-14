@@ -207,7 +207,6 @@ footballStats.init = async () => {
     for (i = 0; i < stages.length; i++) {
       matches = await footballStats.getStageMatches(stages[i]);
       stageMatches = { stage: stages[i], matches: matches };
-      console.log("this comes after await", stageMatches);
       stagesMatches.push(stageMatches);
     }
 
